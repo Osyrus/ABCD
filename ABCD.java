@@ -1,51 +1,63 @@
 
 public class ABCD {
-    private int A;
-    private int B;
-    private int C;
-    private int D;
+    private double A;
+    private double B;
+    private double C;
+    private double D;
 
     //Constructor, sets A, B, C and D.
-    //Note: change this so that the default (with not A,B,C,D set) is zero.
-    public ABCD(int A,int B,int C,int D) {
+    public ABCD(double A, double B, double C, double D) { //(Giggady)
         this.A = A;
         this.B = B;
         this.C = C;
         this.D = D;
     }
+    //Default Constructor.
+    public ABCDMat() {
+        this(0, 0, 0, 0);
+    }
+    //Constructor using matrix input
+    public ABCDMat(double[][] mat) {
+        setMat(mat);
+    }
 
     //Returns the ABCD matrix in a two dimensional matrix form.
-    //Note: Figure out the ordering of the array for later mat manips.
-    public int[][] getMat() {
-        private int[][] ABCDMat = new int[][] {{A, B},{C, D}};
-        return ABCDMat;
+    public double[][] getMat() {
+        return new double[][] {{A, B},{C, D}};
+    }
+    //Sets A,B,C and D from a matrix
+    public void setMat(double[][] mat) {
+        this.A = mat[1][1];
+        this.B = mat[1][2];
+        this.C = mat[2][1];
+        this.D = mat[2][2];
     }
 
     //Returns the requested matrix elements
-    public int getA() {
+    public double getA() {
         return A;
     }
-    public int getB() {
+    public double getB() {
         return B;
     }
-    public int getC() {
+    public double getC() {
         return C;
     }
-    public int getD() {
+    public double getD() {
         return D;
     }
 
     //Sets the requested matrix elements
-    public void setA(int A) {
+    public void setA(double A) {
         this.A = A;
     }
-    public void setB(int B) {
+    public void setB(double B) {
         this.B = B;
     }
-    public void setC(int C) {
+    public void setC(double C) {
         this.C = C;
     }
-    public void setD(int D) {
+    public void setD(double D) {
         this.D = D;
     }
 }

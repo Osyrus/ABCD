@@ -6,7 +6,7 @@ public class ABCD {
     private double D;
 
     //Constructor, sets A, B, C and D.
-    public ABCD(double A, double B, double C, double D) { //(Giggady)
+    public ABCD(double A, double B, double C, double D) { //[Giggady]
         this.A = A;
         this.B = B;
         this.C = C;
@@ -61,17 +61,3 @@ public class ABCD {
         this.D = D;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

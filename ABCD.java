@@ -12,9 +12,9 @@ public class ABCD {
         this.C = C;
         this.D = D;
     }
-    //Default Constructor.
+    //Default Constructor, defaults to the identity matrix
     public ABCDMat() {
-        this(0, 0, 0, 0);
+        this(1, 0, 0, 1);
     }
     //Constructor using matrix input
     public ABCDMat(double[][] mat) {

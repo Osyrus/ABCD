@@ -14,6 +14,10 @@ public class FreeSpace extends ABCD {
     public FreeSpace(double l) {
         this(l, n);
     }
+    //Default to free space of length 10 cm
+    public FreeSpace() {
+        this(0.1);
+    }
 
     //Matrix calculator for free space
     private double[][] calcMat() {

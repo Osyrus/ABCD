@@ -18,6 +18,10 @@ public class CurvSurf extends ABCD {
     public CurvSurf(double nI, double nF, double R) {
         this(nI, nF, R, 0);
     }
+    //Default to a flat nothing thingo
+    public CurvSurf() {
+        this(n, n, Double.POSITIVE_INFINITY);
+    }
 
     //Calculate the matrix for a thick lens
     private double[][] calcMat() {
@@ -26,7 +30,19 @@ public class CurvSurf extends ABCD {
         private double AoRc = Math.asin(nI/nF * Math.sin(AoI1c)); //Angle of refraction
         private double dn = (nF * Math.cos(AoRc) - nI * Math.cos(AoIc)) / (Math.cos(AoRc) * Math.cos(AoIc));
 
-        return new double[][] {{Math.cos(AoRc)/Math.cos(AoIc), 0},{dn/R, Math.cos(AoIc)/Math.cos(AoRc)}};
+        return new double[][] {{Math.cos(AoRc)/Math.cos(AoIc), 0.0},{dn/R, Math.cos(AoIc)/Math.cos(AoRc)}};
+    }
+
+    //Swap values to make the matrix suitable for the return trip
+    public void reverse() {
+        //Reverse the refractive indices (initial to final, final to initial)
+        private int nTemp = nI;
+        nI = nF;
+        nF = nTemp;
+        //Reverse the radius of curvature
+        R = -R;
+        //Recalculate the matrix elements
+        super.setMat(calcMat());
     }
 
     //All the get functions

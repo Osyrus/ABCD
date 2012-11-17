@@ -1,12 +1,16 @@
 
 public class ThinLens extends ABCD {
-    private double f; //Focal length
+    private double f; //Focal length [in metres]
 
     //Constructor
     //Note: should make it catch an error if f == 0
     public ThinLens(double f) {
         this.f = f;
         super(calcMat());
+    }
+    //Default to f = 1 m
+    public ThinLens() {
+        this(1);
     }
 
     //Calculates the matrix for the a thin lens

@@ -20,10 +20,27 @@ public class ThickLens extends ABCD {
 
         super(calcMat())
     }
+    //Default to a 10 mm thick lens with global ref ind and flat surfaces
+    public ThickLens() {
+        this(0.01, n, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
+    }
 
     //Calculate the matrix for a thick lens
     private double[][] calcMat() {
         return matMult(matMult(BackSurf.getMat(),Medium.getMat()),FrontSurf.getMat());
+    }
+
+    public void reverse() {
+        //Front surface is now the back surface, and vice versa
+        private ABCD ABCDTemp = FrontSurf;
+        FrontSurf = BackSurf;
+        BackSurf = ABCDTemp;
+        //Reverse the radii of curvature
+        R1 = -R1;
+        R2 = -R2;
+        //Reset the radii of curvature (which also recalculates and resets the matrix)
+        setR1(R1);
+        setR2(R2);
     }
 
     //All the get functions

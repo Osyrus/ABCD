@@ -2,7 +2,7 @@
 public class GRINLens extends ABCD {
     private double l; //Length of GRIN lens
     private double n1; //Base refractive index of the lens material
-    private double n2; //Quadratic refractive index reduction variable
+    private double n2; //Quadratic refractive index factor
 
     //Constructor
     public GRINLens(double l, double n1, double n2) {
@@ -11,6 +11,10 @@ public class GRINLens extends ABCD {
         this.n2 = n2;
 
         super(calcMat());
+    }
+    //Default to 10 mm thickness with global ref ind and no quad ref ind factor
+    public GRINLens() {
+        this(0.01, n, 0);
     }
 
     //Matrix Calculation
@@ -36,7 +40,7 @@ public class GRINLens extends ABCD {
 
     //Set Functions
     public void setL(double l) {
-        this.l = l;
+        this.l = l;r
         super.setMat(calcMat());
     }
     public void setn1(double n1) {

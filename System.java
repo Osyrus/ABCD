@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import org.apache.commons.math3.complex.Complex;
 
 public class System {
     private ArrayList[] system; //The resonator system array, angle bracket thing? (<Object>)
@@ -14,7 +15,7 @@ public class System {
         
         //Create the system array and round trip matrix and fills them
         //with the first element of the system (the identity matrix)
-        for(i = 0; i < 2; i++) {
+        for(i = 0; i < dim; i++) {
             rtMat[i] = new ABCD(); //Do the new keywords have to be here?
             system[i] = new ArrayList(new ABCD());
         }
@@ -22,13 +23,40 @@ public class System {
 
     //Updates the round trip matrix for the specified dimension
     public void updateRTMat(int dim) {
+        //Calculate the forward direction
         for(i = 0; i <= system[dim].size(); i++)
             rtMat[dim] = matMult(system[dim].getABCD(i, dim).getMat(), rtMat[dim]);
+        //Calculate the reverse direction
+        for(i = (system[dim].size()-1); i >= 0; i--) {
+            system[dim].getABCD(i, dim).reverse(); //Reverses the matrix
+            rtMat[dim] = matMult(system[dim].getABCD(i, dim).getMat(), rtMat[dim]); //Combines it
+            system[dim].getABCD(i, dim).reverse(); //Reverses it back
+        }
     }
     //Updates the round trip matrix for all dimensions
     public void updateRTMat() {
         for(i = 0; i < dim; i++)
             updateRTMat(i);
+    }
+
+    //Calculate and return the real and imaginary parts
+    private double getReal() { //Haha, get it?
+        return (this.getD() - this.getA()) / (2.0 * this.getB());
+    }
+    private double getImg() { //Not as funny...
+        return Math.sqrt(4.0 - Math.pow((this.getA() + this.getD()),2.0)) / (2.0 * this.getB());
+    }
+
+    //Calculate the half trace
+    public double getHalfTrace() {
+        return (this.getA() + this.getD()) / 2.0;
+    }
+
+    public boolean isStable() {
+        if (Double.isNaN(getImg()))
+            return false;
+        else
+            return true;
     }
 
     //Optical element add function

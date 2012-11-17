@@ -4,6 +4,7 @@ public class ABCD {
     private double B;
     private double C;
     private double D;
+    //Maybe add storage for a reversed set of elements in case a reverse is needed?
 
     //Constructor, sets A, B, C and D.
     public ABCD(double A, double B, double C, double D) { //[Giggady]
@@ -59,5 +60,11 @@ public class ABCD {
     }
     public void setD(double D) {
         this.D = D;
+    }
+
+    //The reverse function, here it does nothing, but can be overwritten in subclasses
+    //that require it due to the matrix needing to be different forward and back.
+    public void reverse() {
+        //Overwrite in the subclasses that need it!!
     }
 }

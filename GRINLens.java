@@ -14,7 +14,7 @@ public class GRINLens extends ABCD {
     }
     //Default to 10 mm thickness with global ref ind and no quad ref ind factor
     public GRINLens() {
-        this(0.01, n, 0);
+        this(0.01, Global.n, 0);
     }
 
     //Matrix Calculation

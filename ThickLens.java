@@ -1,3 +1,4 @@
+import Global.matMult;
 
 public class ThickLens extends ABCD {
     private double l; //Lens thickness
@@ -14,15 +15,15 @@ public class ThickLens extends ABCD {
         this.n1 = n1;
         this.R1 = R1;
         this.R2 = R2;
-        this.FrontSurf = new CurvSurf(n, n1, R1);
-        this.BackSurf = new CurvSurf(n1, n, R2);
+        this.FrontSurf = new CurvSurf(Global.n, n1, R1);
+        this.BackSurf = new CurvSurf(n1, Global.n, R2);
         this.Medium = new FreeSpace(l, n1);
 
         super(calcMat())
     }
     //Default to a 10 mm thick lens with global ref ind and flat surfaces
     public ThickLens() {
-        this(0.01, n, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
+        this(0.01, Global.n, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
     }
 
     //Calculate the matrix for a thick lens
@@ -79,18 +80,5 @@ public class ThickLens extends ABCD {
         this.R2 = R2;
         BackSurf.setR(R2);
         super.setMat(calcMat());
-    }
-
-    //Matrix multiplication code
-    //Note, this is repeated in the resonator system code, fix this somehow? Global function?
-    private double[][] matMult(double[][] mat1, double[][] mat2) {
-        private double[][] mat = new double[2][2];
-
-        for(int i = 0; i < 2; i++)
-            for(int j = 0; j < 2; j++)
-                for(int k = 0; k < 2; k++)
-                    mat[i][j] += mat1[i][k] * mat2[k][j];
-
-        return mat;
     }
 }

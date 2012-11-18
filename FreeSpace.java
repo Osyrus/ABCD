@@ -12,7 +12,7 @@ public class FreeSpace extends ABCD {
     }
     //Constructor where default refractive index is global index
     public FreeSpace(double l) {
-        this(l, n);
+        this(l, Global.n);
     }
     //Default to free space of length 10 cm
     public FreeSpace() {

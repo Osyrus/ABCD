@@ -20,7 +20,7 @@ public class CurvSurf extends ABCD {
     }
     //Default to a flat nothing thingo
     public CurvSurf() {
-        this(n, n, Double.POSITIVE_INFINITY);
+        this(Global.n, Global.n, Double.POSITIVE_INFINITY);
     }
 
     //Calculate the matrix for a thick lens

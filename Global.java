@@ -2,7 +2,7 @@ public class Global {
     public static double n;
 
     public static double[][] matMult(double[][] mat1, double[][] mat2) {
-        private double[][] mat = new double[2][2];
+        double[][] mat = new double[2][2];
 
         for(int i = 0; i < 2; i++)
             for(int j = 0; j < 2; j++)

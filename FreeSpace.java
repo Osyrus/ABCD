@@ -5,10 +5,12 @@ public class FreeSpace extends ABCD {
 
     //Constructor
     public FreeSpace(double l, double n1) {
+        super();
+
         this.l = l;
         this.n1 = n1;
 
-        super(calcMat());
+        super.setMat(calcMat());
     }
     //Constructor where default refractive index is global index
     public FreeSpace(double l) {

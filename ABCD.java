@@ -14,11 +14,11 @@ public class ABCD {
         this.D = D;
     }
     //Default Constructor, defaults to the identity matrix
-    public ABCDMat() {
+    public ABCD() {
         this(1, 0, 0, 1);
     }
     //Constructor using matrix input
-    public ABCDMat(double[][] mat) {
+    public ABCD(double[][] mat) {
         setMat(mat);
     }
 

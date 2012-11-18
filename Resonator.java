@@ -1,52 +1,52 @@
 import java.util.ArrayList;
 import org.apache.commons.math3.complex.Complex;
-import Global.matMult;
 
-public class System {
-    private ArrayList[] system; //The resonator system array, angle bracket thing? (<Object>)
+public class Resonator {
+    private ArrayList<ABCD>[] system; //The resonator system array
     private int dim; //Number of dimensions
     private ABCD[] rtMat; //The round trip matrix
     private Complex[] q;
 
     //Basic Constructor, argument sets the number of dimensions
     //Note: Overload? Perhaps default 1D? Or maybe load an existing system from file?
-    public System(int dim) {
+    public Resonator(int dim) {
         this.dim = dim;
-        system = new ArrayList[dim]; //Create an ArrayList array of desired dimension
+        system = new ArrayList<ABCD>[dim]; //Create an ArrayList array of desired dimension
+        //A warning is appearing here for the ArrayList "generic array creation", fix somehow?
         rtMat = new ABCD[dim];
         q = new Complex[dim];
         
         //Create the system array and round trip matrix and fills them
         //with the first element of the system (the identity matrix)
-        for(i = 0; i < dim; i++) {
-            rtMat[i] = new ABCD(); //Do the new keywords have to be here?
-            system[i] = new ArrayList(new ABCD());
+        for(int i = 0; i < dim; i++) {
+            rtMat[i] = new ABCD();
+            system[i] = new ArrayList<ABCD>();
         }
     }
 
     //Updates the round trip matrix for the specified dimension
     public void updateRTMat(int dim) {
-        private double[][] temp = new double[][] {{1,0},{0,1}};
+        double[][] temp = new double[][] {{1,0},{0,1}};
         //Calculate the forward direction
-        for(i = 0; i <= system[dim].size(); i++)
-            temp = matMult(system[dim].getABCD(i, dim).getMat(), temp);
+        for(int i = 0; i <= system[dim].size(); i++)
+            temp = Global.matMult(getABCD(i, dim).getMat(), temp);
         //Calculate the reverse direction
-        for(i = (system[dim].size()-1); i >= 0; i--) {
-            system[dim].getABCD(i, dim).reverse(); //Reverses the matrix
-            temp = matMult(system[dim].getABCD(i, dim).getMat(), temp); //Combines it
-            system[dim].getABCD(i, dim).reverse(); //Reverses it back
+        for(int i = (system[dim].size()-1); i >= 0; i--) {
+            getABCD(i, dim).reverse(); //Reverses the matrix
+            temp = Global.matMult(getABCD(i, dim).getMat(), temp); //Combines it
+            getABCD(i, dim).reverse(); //Reverses it back
         }
         rtMat[dim].setMat(temp);
     }
     //Updates the round trip matrix for all dimensions
     public void updateRTMat() {
-        for(i = 0; i < dim; i++)
+        for(int i = 0; i < dim; i++)
             updateRTMat(i);
     }
 
     public Complex getQ(int dim) {
-        updateRTMat();
-        if (isStable()) {
+        updateRTMat(dim);
+        if (isStable(dim)) {
             calcQ(dim);
             return q[dim];
         } else {
@@ -56,9 +56,9 @@ public class System {
 
     //Calculate the initial q value
     private void calcQ(int dim) {
-        private double img;
+        double img;
 
-        if (getImg() > 0)
+        if (getImg(dim) > 0)
             img = -getImg(dim);
         else
             img = getImg(dim);

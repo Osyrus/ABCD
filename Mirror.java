@@ -5,9 +5,11 @@ public class Mirror extends ABCD {
 
     //Constructor
     public Mirror(double R) {
+        super();
+
         this.R = R;
 
-        super(calcMat());
+        super.setMat(calcMat());
     }
     //Default constructor for a flat mirror
     public Mirror() {
@@ -22,7 +24,7 @@ public class Mirror extends ABCD {
     //On reverse, it sets the matrix to the identity as mirrors are only counted once,
     //calling it again sets it back to the original matrix
     public void reverse() {
-        private double[][] revTemp = this.getMat();
+        double[][] revTemp = this.getMat();
         this.setMat(temp);
         temp = revTemp;
     }

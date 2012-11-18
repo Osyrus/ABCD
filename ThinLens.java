@@ -5,8 +5,11 @@ public class ThinLens extends ABCD {
     //Constructor
     //Note: should make it catch an error if f == 0
     public ThinLens(double f) {
+        super();
+
         this.f = f;
-        super(calcMat());
+        
+        super.setMat(calcMat());
     }
     //Default to f = 1 m
     public ThinLens() {

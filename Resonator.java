@@ -64,7 +64,7 @@ public class Resonator {
             img = getImg(dim);
 
         q[dim] = Complex.valueOf(getReal(dim), img);
-        q[dim] = q[dim].divide(q[dim]);
+        q[dim] = Complex.ONE.divide(q[dim]);
     }
 
     //Calculate and return the real and imaginary parts

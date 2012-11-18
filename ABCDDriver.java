@@ -4,7 +4,7 @@ class ABCDDriver {
     public static void main(String[] args) {
         Resonator resonator = new Resonator(1);
         Global.n = 1;
-        Complex q = Complex.ZERO;
+        Complex q;
         double hT = 0;
 
         resonator.addABCD(new Mirror(), 0, 0);
@@ -20,13 +20,7 @@ class ABCDDriver {
         } else {
             System.out.println("The resonator is unstable!");
         }
-        System.out.println("A = "+resonator.getRTMat(0).getA());
-        System.out.println("B = "+resonator.getRTMat(0).getB());
-        System.out.println("C = "+resonator.getRTMat(0).getC());
-        System.out.println("D = "+resonator.getRTMat(0).getD());
 
-        for (int i = 0; i < resonator.getSize(); i++) {
-            System.out.println(resonator.getABCD(i, 0).toString());
-        }
+        System.out.println("Round trip matrix: "+resonator.getRTMat(0).toString());
     }
 }

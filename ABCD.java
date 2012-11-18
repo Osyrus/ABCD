@@ -28,10 +28,10 @@ public class ABCD {
     }
     //Sets A,B,C and D from a matrix
     public void setMat(double[][] mat) {
-        this.A = mat[1][1];
-        this.B = mat[1][2];
-        this.C = mat[2][1];
-        this.D = mat[2][2];
+        this.A = mat[0][0];
+        this.B = mat[0][1];
+        this.C = mat[1][0];
+        this.D = mat[1][1];
     }
 
     //Returns the requested matrix elements

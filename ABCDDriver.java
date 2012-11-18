@@ -7,11 +7,11 @@ class ABCDDriver {
         Complex q = Complex.ZERO;
         double hT = 0;
 
-        resonator.addABCD(new Mirror(), 1, 0);
+        resonator.addABCD(new Mirror(), 0, 0);
+        resonator.addABCD(new FreeSpace(0.1), 1, 0);
         resonator.addABCD(new FreeSpace(0.1), 2, 0);
-        resonator.addABCD(new FreeSpace(0.1), 3, 0);
-        resonator.addABCD(new Mirror(), 4, 0);
-        resonator.addABCD(new ThinLens(0.2), 3, 0);
+        resonator.addABCD(new Mirror(), 3, 0);
+        resonator.addABCD(new ThinLens(0.2), 2, 0);
 
         if (resonator.isStable(0)) {
             q = resonator.getQ(0);

@@ -5,6 +5,7 @@ public class System {
     private ArrayList[] system; //The resonator system array, angle bracket thing? (<Object>)
     private int dim; //Number of dimensions
     private ABCD[] rtMat; //The round trip matrix
+    private Complex[] q;
 
     //Basic Constructor, argument sets the number of dimensions
     //Note: Overload? Perhaps default 1D? Or maybe load an existing system from file?
@@ -12,6 +13,7 @@ public class System {
         this.dim = dim;
         system = new ArrayList[dim]; //Create an ArrayList array of desired dimension
         rtMat = new ABCD[dim];
+        q = new Complex[dim];
         
         //Create the system array and round trip matrix and fills them
         //with the first element of the system (the identity matrix)
@@ -23,15 +25,17 @@ public class System {
 
     //Updates the round trip matrix for the specified dimension
     public void updateRTMat(int dim) {
+        private double[][] temp = new double[][] {{1,0},{0,1}};
         //Calculate the forward direction
         for(i = 0; i <= system[dim].size(); i++)
-            rtMat[dim] = matMult(system[dim].getABCD(i, dim).getMat(), rtMat[dim]);
+            temp = matMult(system[dim].getABCD(i, dim).getMat(), temp);
         //Calculate the reverse direction
         for(i = (system[dim].size()-1); i >= 0; i--) {
             system[dim].getABCD(i, dim).reverse(); //Reverses the matrix
-            rtMat[dim] = matMult(system[dim].getABCD(i, dim).getMat(), rtMat[dim]); //Combines it
+            temp = matMult(system[dim].getABCD(i, dim).getMat(), temp); //Combines it
             system[dim].getABCD(i, dim).reverse(); //Reverses it back
         }
+        rtMat[dim].setMat(temp);
     }
     //Updates the round trip matrix for all dimensions
     public void updateRTMat() {
@@ -39,21 +43,43 @@ public class System {
             updateRTMat(i);
     }
 
-    //Calculate and return the real and imaginary parts
-    private double getReal() { //Haha, get it?
-        return (this.getD() - this.getA()) / (2.0 * this.getB());
+    public Complex getQ(int dim) {
+        if (isStable()) {
+            calcQ(dim);
+            return q[dim];
+        } else {
+            return Complex.NaN; //Throw an error here or something?
+        }
     }
-    private double getImg() { //Not as funny...
-        return Math.sqrt(4.0 - Math.pow((this.getA() + this.getD()),2.0)) / (2.0 * this.getB());
+
+    //Calculate the initial q value
+    private void calcQ(int dim) {
+        private double img;
+
+        if (getImg() > 0)
+            img = -getImg(dim);
+        else
+            img = getImg(dim);
+
+        q[dim] = Complex.valueOf(getReal(dim), img);
+        q[dim] = q[dim].divide(q[dim]);
+    }
+
+    //Calculate and return the real and imaginary parts
+    private double getReal(int dim) { //Haha, get it?
+        return (rtMat[dim].getD() - rtMat[dim].getA()) / (2.0 * rtMat[dim].getB());
+    }
+    private double getImg(int dim) { //Not as funny...
+        return Math.sqrt(4.0 - Math.pow((rtMat[dim].getA() + rtMat[dim].getD()),2.0)) / (2.0 * rtMat[dim].getB());
     }
 
     //Calculate the half trace
-    public double getHalfTrace() {
-        return (this.getA() + this.getD()) / 2.0;
+    public double getHalfTrace(int dim) {
+        return (rtMat[dim].getA() + rtMat[dim].getD()) / 2.0;
     }
 
-    public boolean isStable() {
-        if (Double.isNaN(getImg()))
+    public boolean isStable(int dim) {
+        if (Double.isNaN(getImg(dim)))
             return false;
         else
             return true;

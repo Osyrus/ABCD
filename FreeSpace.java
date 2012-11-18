@@ -23,7 +23,7 @@ public class FreeSpace extends ABCD {
 
     //Matrix calculator for free space
     private double[][] calcMat() {
-        return new double[][] {{1, 1/n1},{0, 1}};
+        return new double[][] {{1, l/n1},{0, 1}};
     }
 
     //Get functions

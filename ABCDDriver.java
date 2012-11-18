@@ -24,5 +24,9 @@ class ABCDDriver {
         System.out.println("B = "+resonator.getRTMat(0).getB());
         System.out.println("C = "+resonator.getRTMat(0).getC());
         System.out.println("D = "+resonator.getRTMat(0).getD());
+
+        for (int i = 0; i < resonator.getSize(); i++) {
+            System.out.println(resonator.getABCD(i, 0).toString());
+        }
     }
 }

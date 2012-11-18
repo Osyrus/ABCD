@@ -102,4 +102,7 @@ public class Resonator {
         updateRTMat(dim);
         return rtMat[dim];
     }
+    public int getSize() {
+        return system.get(0).size();
+    }
 }

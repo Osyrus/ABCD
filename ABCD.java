@@ -34,6 +34,10 @@ public class ABCD {
         this.D = mat[1][1];
     }
 
+    public String toString() {
+        return "["+this.A+", "+this.B+"; "+this.C+", "+this.D+"]";
+    }
+
     //Returns the requested matrix elements
     public double getA() {
         return A;

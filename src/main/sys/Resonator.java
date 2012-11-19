@@ -1,8 +1,8 @@
 package main.sys;
 
 import java.util.ArrayList;
-import org.apache.commons.math3.complex.Complex;
 import main.mats.*;
+import org.apache.commons.math3.complex.Complex;
 
 /**
 *The Resonator class contains an ArrayList on optical elements and has methods for working on those elements.
@@ -44,8 +44,9 @@ public class Resonator {
     public void updateRTMat(int dim) {
         double[][] temp = new double[][] {{1,0},{0,1}};
         //Calculate the forward direction
-        for(int i = 0; i < system.get(dim).size(); i++)
+        for(int i = 0; i < system.get(dim).size(); i++) {
             temp = Global.matMult(getABCD(i, dim).getMat(), temp);
+        }
         //Calculate the reverse direction
         for(int i = (system.get(dim).size()-1); i >= 0; i--) {
             getABCD(i, dim).reverse(); //Reverses the matrix
@@ -58,8 +59,9 @@ public class Resonator {
     *Updates the round trip matrix for all dimensions.
     */
     public void updateRTMat() {
-        for(int i = 0; i < dim; i++)
+        for(int i = 0; i < dim; i++) {
             updateRTMat(i);
+        }
     }
 
     /**
@@ -82,10 +84,12 @@ public class Resonator {
     private void calcQ(int dim) {
         double img;
 
-        if (getImg(dim) > 0)
+        if (getImg(dim) > 0) {
             img = -getImg(dim);
-        else
+        }
+        else {
             img = getImg(dim);
+        }
 
         q[dim] = Complex.valueOf(getReal(dim), img);
         q[dim] = Complex.ONE.divide(q[dim]);
@@ -118,10 +122,12 @@ public class Resonator {
     */
     public boolean isStable(int dim) {
         updateRTMat(dim);
-        if (Double.isNaN(getImg(dim)))
+        if (Double.isNaN(getImg(dim))) {
             return false;
-        else
+        }
+        else {
             return true;
+        }
     }
 
     /**

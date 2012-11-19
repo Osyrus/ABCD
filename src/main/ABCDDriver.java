@@ -1,8 +1,8 @@
 package main;
 
-import org.apache.commons.math3.complex.Complex;
 import main.mats.*;
 import main.sys.*;
+import org.apache.commons.math3.complex.Complex;
 
 /**
 *Driver class file
@@ -20,8 +20,8 @@ public class ABCDDriver {
         double nL = 1.52; //Lenses
 
         double bAng = Math.toDegrees(Math.atan(n2/Global.n));
-        Complex[] q = new Complex[dimN];
-        double[] hT = new double[dimN];
+        Complex q;
+        double hT;
 
         //My laser configuration!! For complex testing
         //The HR mirror
@@ -58,10 +58,10 @@ public class ABCDDriver {
         for (int i = 0; i < dimN; i++) {
             System.out.println("In dimension "+(i+1)+":");
             if (resonator.isStable(i)) {
-                q[i] = resonator.getQ(i);
-                hT[i] = resonator.getHalfTrace(i);
+                q = resonator.getQ(i);
+                hT = resonator.getHalfTrace(i);
                 System.out.println("This resonator is stable, and has an initial q of: "+q.toString());
-                System.out.println("With a half trace of: "+hT[i]);
+                System.out.println("With a half trace of: "+hT);
             } else {
                 System.out.println("This resonator is unstable!");
             }

@@ -137,7 +137,7 @@ public class ABCD {
     }
 
     /**
-    *The reverse function.
+    *The matrix reverse method.
     *Here it does nothing, but can be overwritten in subclasses that require it.
     *This may be due to an optical element that looks different forwards than backwards.
     */

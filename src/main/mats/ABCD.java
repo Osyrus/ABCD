@@ -139,5 +139,7 @@ public class ABCD {
     *Here it does nothing, but can be overwritten in subclasses that require it.
     *This may be due to an optical element that looks different forwards than backwards.
     */
-    public void reverse();
+    public void reverse() {
+        
+    }
 }

@@ -9,7 +9,9 @@ public class Global {
     */
     public static double n;
 
-    private Global();
+    private Global() {
+        
+    }
 
     /**
     *Performs matrix multiplication (equivalent to doing mat1*mat2 in Matlab)

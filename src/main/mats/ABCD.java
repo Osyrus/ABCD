@@ -3,6 +3,8 @@ package main.mats;
 /**
 *The generic ABCD matrix element class.
 *Can be overridden for specific types of optical elements.
+*
+*@author Myles Clark
 */
 public class ABCD {
     private double A;

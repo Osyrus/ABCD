@@ -1,10 +1,20 @@
 package main.mats;
 
+/**
+*A thin lens optical element.
+*Can define the focal length of the lens in metres.
+*
+*@author Myles Clark
+*/
 public class ThinLens extends ABCD {
     private double f; //Focal length [in metres]
 
-    //Constructor
     //Note: should make it catch an error if f == 0
+    /**
+    *Base Constructor.
+    *
+    *@param f The focal length of the lens in metres.
+    */
     public ThinLens(double f) {
         super();
 
@@ -12,7 +22,9 @@ public class ThinLens extends ABCD {
         
         super.setMat(calcMat());
     }
-    //Default to f = 1 m
+    /**
+    *Default constructor, sets the focal length to one metre.
+    */
     public ThinLens() {
         this(1);
     }
@@ -22,11 +34,20 @@ public class ThinLens extends ABCD {
         return new double[][] {{1, 0},{-1/f, 1}};
     }
 
-    //Return the focal length
+    /**
+    *Getter for the focal length of the lens.
+    *
+    *@return The focal length (m).
+    */
     public double getF() {
         return f;
     }
-    //Set the focal length (recalculate C)
+    
+    /**
+    *Setter for the focal length of the lens
+    *
+    *@param f The desired focal length (m).
+    */
     public void setF(double f) {
         this.f = f;
         super.setMat(calcMat());

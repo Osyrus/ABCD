@@ -4,9 +4,10 @@ import org.apache.commons.math3.complex.Complex;
 import main.mats.*;
 import main.sys.*;
 
-
 /**
 *Driver class file
+*
+*@author Myles Clark
 */
 public class ABCDDriver {
     public static void main(String[] args) {

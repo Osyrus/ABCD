@@ -1,6 +1,7 @@
 repositories.remote << 'http://repo1.maven.org/maven2/'
 
 Project.local_task :javadoc
+Project.local_task :run
 
 define 'ABCD' do
     project.version = '0.1.0'
@@ -9,6 +10,9 @@ define 'ABCD' do
 
     task :javadoc do
         system 'javadoc -d ./javadoc -sourcepath ./src -subpackages main'
+    end
+    task :run => :compile do
+        system 'java -cp ./target/main/classes main.ABCDDriver'
     end
 end
 

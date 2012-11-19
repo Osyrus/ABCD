@@ -1,3 +1,6 @@
+package main.mats;
+
+import main.sys.Global;
 
 public class FreeSpace extends ABCD {
     private double l; //Length of free space

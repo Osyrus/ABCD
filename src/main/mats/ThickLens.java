@@ -1,4 +1,6 @@
+package main.mats;
 
+import main.sys.Global;
 
 public class ThickLens extends ABCD {
     private double l; //Lens thickness

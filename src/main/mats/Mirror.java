@@ -1,3 +1,4 @@
+package main.mats;
 
 public class Mirror extends ABCD {
     private double R; //Radius of curvature of the mirror

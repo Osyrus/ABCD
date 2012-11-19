@@ -1,6 +1,14 @@
-import org.apache.commons.math3.complex.Complex;
+package main;
 
-class ABCDDriver {
+import org.apache.commons.math3.complex.Complex;
+import main.mats.*;
+import main.sys.*;
+
+
+/**
+*Driver class file
+*/
+public class ABCDDriver {
     public static void main(String[] args) {
         Resonator resonator = new Resonator(1);
         Global.n = 1;

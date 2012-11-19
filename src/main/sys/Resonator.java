@@ -1,14 +1,26 @@
+package main.sys;
+
 import java.util.ArrayList;
 import org.apache.commons.math3.complex.Complex;
+import main.mats.*;
 
+/**
+*The Resonator class contains an ArrayList on optical elements and has methods for working on those elements.
+*The round trip matrix can be calculated for the resonator from the contained objects and their order.
+*In addition, the number of dimensions (or directions) is arbitrary.
+*/
 public class Resonator {
     private ArrayList<ArrayList> system; //The resonator system array
     private int dim; //Number of dimensions
     private ABCD[] rtMat; //The round trip matrix
     private Complex[] q;
 
-    //Basic Constructor, argument sets the number of dimensions
     //Note: Overload? Perhaps default 1D? Or maybe load an existing system from file?
+    /**
+    *Basic Constructor.
+    *
+    *@param dim Sets the number of dimensions of the resonator.
+    */
     public Resonator(int dim) {
         this.dim = dim;
         system = new ArrayList<ArrayList>(dim); //Create an ArrayList array of desired dimension
@@ -24,7 +36,11 @@ public class Resonator {
         }
     }
 
-    //Updates the round trip matrix for the specified dimension
+    /**
+    *Updates the round trip matrix for the specified dimension.
+    *
+    *@param dim The dimension to be calculated.
+    */
     public void updateRTMat(int dim) {
         double[][] temp = new double[][] {{1,0},{0,1}};
         //Calculate the forward direction
@@ -38,12 +54,20 @@ public class Resonator {
         }
         rtMat[dim].setMat(temp);
     }
-    //Updates the round trip matrix for all dimensions
+    /**
+    *Updates the round trip matrix for all dimensions.
+    */
     public void updateRTMat() {
         for(int i = 0; i < dim; i++)
             updateRTMat(i);
     }
 
+    /**
+    *Getter for the initial q variable.
+    *
+    *@param dim Dimension to retrieve q from.
+    *@return The initial q value calculated from the round trip matrix.
+    */
     public Complex getQ(int dim) {
         updateRTMat(dim);
         if (isStable(dim)) {
@@ -75,12 +99,23 @@ public class Resonator {
         return Math.sqrt(4.0 - Math.pow((rtMat[dim].getA() + rtMat[dim].getD()),2.0)) / (2.0 * rtMat[dim].getB());
     }
 
-    //Calculate the half trace
+    /**
+    *Getter for the half trace of the round trip matrix.
+    *
+    *@param dim Dimension from which to retrieve the half trace.
+    *@return The half trace.
+    */
     public double getHalfTrace(int dim) {
         updateRTMat(dim);
         return (rtMat[dim].getA() + rtMat[dim].getD()) / 2.0;
     }
 
+    /**
+    *Calculates the imaginary part of the round trip matrix to find if it is stable.
+    *
+    *@param dim Dimension so find stability in.
+    *@return If the resonator is stable in the specified dimension.
+    */
     public boolean isStable(int dim) {
         updateRTMat(dim);
         if (Double.isNaN(getImg(dim)))
@@ -89,15 +124,32 @@ public class Resonator {
             return true;
     }
 
-    //Optical element add function
+    /**
+    *Method to as optical elements to the resonator.
+    *
+    *@param mat The ABCD matrix object to add.
+    *@param index The index location to add the matrix too. If a matrix exists in that index location it will be moved back to accommodate the new one.
+    *@param dim The dimension to add the matrix to.
+    */
     public void addABCD(ABCD mat, int index, int dim) {
         system.get(dim).add(index, mat); //Add the matrix element to the ArrayList
     }
-    //Optical element get function
+    /**
+    *Optical element getter.
+    *
+    *@param index The index location to retrieve the ABCD matrix from.
+    *@param dim The dimension to retrieve from.
+    *@return The ABCD matrix object for the specified index and dimension.
+    */
     public ABCD getABCD(int index, int dim) {
         return (ABCD) system.get(dim).get(index); //Get the matrix element from the ArrayList
     }
-    //Round trip matrix get function
+    /**
+    *Round trip matrix getter, recalculates the matrix for the resonator first.
+    *
+    *@param dim The dimension to retrieve the round trip matrix from.
+    *@return The round trip matrix of the resonator for the specified direction.
+    */
     public ABCD getRTMat(int dim) {
         updateRTMat(dim);
         return rtMat[dim];

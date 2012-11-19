@@ -1,3 +1,6 @@
+package main.mats;
+
+import main.sys.Global;
 
 public class CurvSurf extends ABCD {
     private double nI; //Initial index

@@ -1,3 +1,6 @@
+package main.mats;
+
+import main.sys.Global;
 
 public class GRINLens extends ABCD {
     private double l; //Length of GRIN lens

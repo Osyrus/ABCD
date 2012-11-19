@@ -1,3 +1,4 @@
+package main.mats;
 
 public class ThinLens extends ABCD {
     private double f; //Focal length [in metres]

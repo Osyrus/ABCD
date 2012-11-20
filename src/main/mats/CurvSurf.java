@@ -54,7 +54,7 @@ public class CurvSurf extends ABCD {
     private double[][] calcMat() {
         //Intermediary calculations
         double AoIc = Math.toRadians(AoI);
-        double AoRc = Math.asin(nI/nF * Math.sin(AoIc)); //Angle of refraction
+        double AoRc = Math.asin((nI/nF) * Math.sin(AoIc)); //Angle of refraction
         double dn = (nF * Math.cos(AoRc) - nI * Math.cos(AoIc)) / (Math.cos(AoRc) * Math.cos(AoIc));
 
         return new double[][] {{Math.cos(AoRc)/Math.cos(AoIc), 0.0},{dn/R, Math.cos(AoIc)/Math.cos(AoRc)}};

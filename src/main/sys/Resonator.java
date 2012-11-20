@@ -148,7 +148,7 @@ public class Resonator {
     *@return The ABCD matrix object for the specified index and dimension.
     */
     public ABCD getABCD(int index, int dim) {
-        return (ABCD) system.get(dim).get(index); //Get the matrix element from the ArrayList
+        return (ABCD) system.get(dim).get(index); //Get the matrix object from the ArrayList
     }
     /**
     *Round trip matrix getter, recalculates the matrix for the resonator first.

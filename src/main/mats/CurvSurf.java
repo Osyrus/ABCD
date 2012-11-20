@@ -68,12 +68,10 @@ public class CurvSurf extends ABCD {
     public void reverse() {
         //Reverse the refractive indices (initial to final, final to initial)
         double nTemp = nI;
-        nI = nF;
-        nF = nTemp;
+        setnI(nF);
+        setnF(nTemp);
         //Reverse the radius of curvature
-        R = -R;
-        //Recalculate the matrix elements
-        super.setMat(calcMat());
+        setR(-R);
     }
 
     /**

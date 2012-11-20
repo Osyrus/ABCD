@@ -60,15 +60,12 @@ public class ThickLens extends ABCD {
     */
     public void reverse() {
         //Front surface is now the back surface, and vice versa
-        CurvSurf ABCDTemp = FrontSurf;
+        CurvSurf SurfTemp = FrontSurf;
         FrontSurf = BackSurf;
-        BackSurf = ABCDTemp;
+        BackSurf = SurfTemp;
         //Reverse the radii of curvature
-        R1 = -R1;
-        R2 = -R2;
-        //Reset the radii of curvature (which also recalculates and resets the matrix)
-        setR1(R1);
-        setR2(R2);
+        setR1(-R1);
+        setR2(-R2);
     }
 
     /**

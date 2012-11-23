@@ -47,6 +47,9 @@ public class ABCD {
     *@return The Java array version of the ABCD matrix elements.
     */
     public double[][] getMat() {
+        if (C == -0.0) {
+            C = 0.0;
+        }
         return new double[][] {{A, B},{C, D}};
     }
     /**
@@ -67,6 +70,9 @@ public class ABCD {
     *@return The matrix in the form "[A, B; C, D]". This is equivalent to how a matrix would be created in Matlab.
     */
     public String toString() {
+        if (C == -0.0) {
+            C = 0.0;
+        }
         return "["+this.A+", "+this.B+"; "+this.C+", "+this.D+"]";
     }
 

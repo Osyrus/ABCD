@@ -55,17 +55,11 @@ public class ThickLens extends ABCD {
     /**
     *As the lens will look different on the return path for the round trip matrix, this can
     *be called to reverse the matrix.
-    *This is done by swapping the front and back surfaces and reversing the
-    *radius of curvature for each.
+    *This is done by calling reverse on the front and back surfaces.
     */
     public void reverse() {
-        //Front surface is now the back surface, and vice versa
-        CurvSurf SurfTemp = FrontSurf;
-        FrontSurf = BackSurf;
-        BackSurf = SurfTemp;
-        //Reverse the radii of curvature
-        setR1(-R1);
-        setR2(-R2);
+        FrontSurf.reverse();
+        BackSurf.reverse();
     }
 
     /**

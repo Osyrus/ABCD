@@ -52,6 +52,7 @@ public class ABCDDriver {
         //The first Brewster face
         resonator.addABCD(new CurvSurf(Global.n, n2, Double.POSITIVE_INFINITY, 0), 6, 0);
         resonator.addABCD(new CurvSurf(Global.n, n2, Double.POSITIVE_INFINITY, bAng), 6, 1);
+        resonator.getABCD(6, 1).reverse();
         System.out.println("B1: "+resonator.getABCD(6, 1).toString());
         //The gain medium (for now just free space, test GRIN later)
         resonator.addABCD(new FreeSpace(0.0633, n2), 7, 0);

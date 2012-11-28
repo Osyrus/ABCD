@@ -11,6 +11,7 @@ public class ABCD {
     private double B;
     private double C;
     private double D;
+    protected boolean reversed;
 
     /**
     *Base Constructor, sets the A, B, C and D components of the matrix.
@@ -25,6 +26,7 @@ public class ABCD {
         this.B = B;
         this.C = C;
         this.D = D;
+        reversed = false;
     }
     /**
     *Default Constructor, sets the matrix equal to the identity matrix.
@@ -148,6 +150,6 @@ public class ABCD {
     *This may be due to an optical element that looks different forwards than backwards.
     */
     public void reverse() {
-        
+        reversed = !reversed;
     }
 }

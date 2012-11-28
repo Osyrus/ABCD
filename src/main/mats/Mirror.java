@@ -9,7 +9,7 @@ package main.mats;
 */
 public class Mirror extends ABCD {
     private double R; //Radius of curvature of the mirror in metres.
-    private double[][] temp = new double[][] {{1,0},{0,1}};
+    private double rAct; //Storage of the actual RoC
 
     /**
     *Base Constructor.
@@ -20,6 +20,7 @@ public class Mirror extends ABCD {
         super();
 
         this.R = R;
+        rAct = R;
 
         super.setMat(calcMat());
     }
@@ -41,9 +42,13 @@ public class Mirror extends ABCD {
     *Calling this again sets the element back to the original matrix.
     */
     public void reverse() {
-        double[][] revTemp = this.getMat();
-        this.setMat(temp);
-        temp = revTemp;
+        if (reversed) {
+            setR(rAct);
+            reversed = false;
+        } else {
+            setR(Double.POSITIVE_INFINITY);
+            reversed = true;
+        }
     }
 
     /**

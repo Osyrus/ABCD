@@ -60,6 +60,7 @@ public class ThickLens extends ABCD {
     public void reverse() {
         FrontSurf.reverse();
         BackSurf.reverse();
+        super.reverse();
     }
 
     /**

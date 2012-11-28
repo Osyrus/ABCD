@@ -72,6 +72,8 @@ public class CurvSurf extends ABCD {
         setnF(nTemp);
         //Reverse the radius of curvature
         setR(-R);
+        //Reverse the boolean flag
+        super.reverse();
     }
 
     /**

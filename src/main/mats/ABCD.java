@@ -29,18 +29,18 @@ public class ABCD {
         reversed = false;
     }
     /**
-    *Default Constructor, sets the matrix equal to the identity matrix.
-    */
-    public ABCD() {
-        this(1, 0, 0, 1);
-    }
-    /**
     *Constructor using matrix input.
     *
     *@param mat The matrix to set the ABCD elements with/
     */
     public ABCD(double[][] mat) {
         setMat(mat);
+    }
+    /**
+    *Default Constructor, sets the matrix equal to the identity matrix.
+    */
+    public ABCD() {
+        this(1, 0, 0, 1);
     }
 
     /**

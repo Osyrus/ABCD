@@ -35,6 +35,7 @@ public class ABCDDriver {
         //Then the negative thick lens
         resonator.addABCD(new ThickLens(0.004, nL, 0.039, Double.POSITIVE_INFINITY), 2, 0);
         resonator.addABCD(new ThickLens(0.004, nL, 0.039, Double.POSITIVE_INFINITY), 2, 1);
+        resonator.getABCD(2, 0).reverse();
         System.out.println("Lens1: "+resonator.getABCD(2, 0).toString());
         //More free space
         resonator.addABCD(new FreeSpace(0.145), 3, 0);

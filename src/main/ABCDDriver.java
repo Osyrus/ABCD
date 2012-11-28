@@ -44,6 +44,7 @@ public class ABCDDriver {
         //The positive thick lens
         resonator.addABCD(new ThickLens(0.002, nL, Double.POSITIVE_INFINITY, 0.104), 4, 0);
         resonator.addABCD(new ThickLens(0.002, nL, Double.POSITIVE_INFINITY, 0.104), 4, 1);
+        resonator.getABCD(4, 0).reverse();
         System.out.println("Lens2: "+resonator.getABCD(4, 0).toString());
         //More free space
         resonator.addABCD(new FreeSpace(0.03), 5, 0);
@@ -61,6 +62,7 @@ public class ABCDDriver {
         //The second Brewster face
         resonator.addABCD(new CurvSurf(n2, Global.n, Double.POSITIVE_INFINITY, 0), 8, 0);
         resonator.addABCD(new CurvSurf(n2, Global.n, Double.POSITIVE_INFINITY, 90.0-bAng), 8, 1);
+        resonator.getABCD(8, 1).reverse();
         System.out.println("B2: "+resonator.getABCD(8, 1).toString());
         //More free space
         resonator.addABCD(new FreeSpace(0.05), 9, 0);

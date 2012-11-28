@@ -13,6 +13,7 @@ public class CurvSurf extends ABCD {
     private double nF; //Final index
     private double R; //Radius of curvature in metres
     private double AoI; //Angle of incidence in degrees
+    private double AoIact; //Storage of AoI
 
     /**
     *Base Constructor.
@@ -29,6 +30,7 @@ public class CurvSurf extends ABCD {
         this.nF = nF;
         this.R = R;
         this.AoI = AoI;
+        this.AoIact = AoI;
 
         super.setMat(calcMat());
     }
@@ -66,6 +68,14 @@ public class CurvSurf extends ABCD {
     *Note, calling twice will return the element to the original form.
     */
     public void reverse() {
+        //Manipulate the angle of incidence for asymmetry
+        double AoRc;
+        if (reversed) {
+            setAoI(AoIact);
+        } else {
+            AoRc = Math.asin((nI/nF) * Math.sin(Math.toRadians(AoI)));
+            setAoI(Math.toDegrees(AoRc));
+        }
         //Reverse the refractive indices (initial to final, final to initial)
         double nTemp = nI;
         setnI(nF);

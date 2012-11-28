@@ -56,7 +56,7 @@ public class CurvSurf extends ABCD {
     private double[][] calcMat() {
         //Intermediary calculations
         double AoIc = Math.toRadians(AoI);
-        double AoRc = Math.asin((nI/nF) * Math.sin(AoIc)); //Angle of refraction
+        double AoRc = getAoR(); //Angle of refraction
         double dn = (nF * Math.cos(AoRc) - nI * Math.cos(AoIc)) / (Math.cos(AoRc) * Math.cos(AoIc));
 
         return new double[][] {{Math.cos(AoRc)/Math.cos(AoIc), 0.0},{dn/R, Math.cos(AoIc)/Math.cos(AoRc)}};
@@ -73,8 +73,7 @@ public class CurvSurf extends ABCD {
         if (reversed) {
             setAoI(AoIact);
         } else {
-            AoRc = Math.asin((nI/nF) * Math.sin(Math.toRadians(AoI)));
-            setAoI(Math.toDegrees(AoRc));
+            setAoI(Math.toDegrees(getAoR()));
         }
         //Reverse the refractive indices (initial to final, final to initial)
         double nTemp = nI;
@@ -117,6 +116,10 @@ public class CurvSurf extends ABCD {
     */
     public double getAoI() {
         return AoI;
+    }
+    //Get the angle of refraction (AoR) in radians
+    private double getAoR() {
+        return Math.asin((nI/nF) * Math.sin(Math.toRadians(AoI)));
     }
 
     /**
